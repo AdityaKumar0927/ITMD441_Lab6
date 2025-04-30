@@ -4,92 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sunrise & Sunset Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <i class="fa-solid fa-sun"></i>
-    <span>Sunrise & Sunset Dashboard</span>
-    <i class="fa-solid fa-snowflake"></i>
-  </header>
+  <header><h1>Sunrise & Sunset Dashboard</h1></header>
 
   <main>
-    <section class="panel">
-      <label for="city">Select a city</label>
-      <div class="select-wrap">
-        <i class="fa-solid fa-location-dot"></i>
-        <select id="city"></select>
-      </div>
+    <section class="controls">
+      <label for="city">Select a city:</label>
+      <select id="city"></select>
       <button id="getData">Get Times</button>
       <span id="error" class="error"></span>
     </section>
 
-    <section id="daylightCard" class="card daylight">
-      <div class="card-head">
-        <div class="title">
-          <i class="fa-solid fa-sun"></i>
-          <span>Current Daylight</span>
-        </div>
-        <span id="displayDate" class="date">—</span>
+    <section id="results" class="results">
+      <div class="day-card">
+        <h2>Today</h2>
+        <ul>
+          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-today">--</span></li>
+          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-today">--</span></li>
+          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-today">--</span></li>
+          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-today">--</span></li>
+          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-today">--</span></li>
+          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-today">--</span></li>
+          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-today">--</span></li>
+        </ul>
       </div>
 
-      <div class="rise-set">
-        <span id="sunriseDisplay">--:--</span>
-        <i class="fa-solid fa-sun"></i>
-        <span id="sunsetDisplay">--:--</span>
+      <div class="day-card">
+        <h2>Tomorrow</h2>
+        <ul>
+          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-tomorrow">--</span></li>
+          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-tomorrow">--</span></li>
+          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-tomorrow">--</span></li>
+          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-tomorrow">--</span></li>
+          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-tomorrow">--</span></li>
+          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-tomorrow">--</span></li>
+          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-tomorrow">--</span></li>
+        </ul>
       </div>
-
-      <div class="progress-track">
-        <div id="progressBar" class="progress-bar"></div>
-        <span class="progress-label">Daylight</span>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat"><span class="stat-label"><i class="fa-regular fa-clock"></i> Day Length</span><span id="dayLengthToday">--:--</span></div>
-        <div class="stat"><span class="stat-label"><i class="fa-solid fa-star"></i> Solar Noon</span><span id="solarNoonToday">--:--</span></div>
-        <div class="stat"><span class="stat-label"><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span id="dawnToday">--:--</span></div>
-        <div class="stat"><span class="stat-label"><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span id="duskToday">--:--</span></div>
-      </div>
-    </section>
-
-    <div class="tabs">
-      <button id="tabToday" class="tab active"><i class="fa-regular fa-calendar"></i> Today</button>
-      <button id="tabTomorrow" class="tab"><i class="fa-regular fa-calendar"></i> Tomorrow</button>
-    </div>
-
-    <section id="detailsToday" class="card details">
-      <h2>Today's Details</h2>
-      <ul>
-        <li><span><i class="fa-solid fa-sun"></i> Sunrise</span><span id="sunrise-today">--:--</span></li>
-        <li><span><i class="fa-solid fa-sun"></i> Sunset</span><span id="sunset-today">--:--</span></li>
-        <li><span><i class="fa-solid fa-star"></i> Solar Noon</span><span id="solar-noon-today">--:--</span></li>
-        <li><span><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span id="dawn-today">--:--</span></li>
-        <li><span><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span id="dusk-today">--:--</span></li>
-        <li><span><i class="fa-regular fa-clock"></i> Day Length</span><span id="day-length-today">--:--</span></li>
-        <li><span><i class="fa-solid fa-earth-americas"></i> Time Zone</span><span id="timezone-today">----</span></li>
-      </ul>
-    </section>
-
-    <section id="detailsTomorrow" class="card details hidden">
-      <h2>Tomorrow's Details</h2>
-      <ul>
-        <li><span><i class="fa-solid fa-sun"></i> Sunrise</span><span id="sunrise-tomorrow">--:--</span></li>
-        <li><span><i class="fa-solid fa-sun"></i> Sunset</span><span id="sunset-tomorrow">--:--</span></li>
-        <li><span><i class="fa-solid fa-star"></i> Solar Noon</span><span id="solar-noon-tomorrow">--:--</span></li>
-        <li><span><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span id="dawn-tomorrow">--:--</span></li>
-        <li><span><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span id="dusk-tomorrow">--:--</span></li>
-        <li><span><i class="fa-regular fa-clock"></i> Day Length</span><span id="day-length-tomorrow">--:--</span></li>
-        <li><span><i class="fa-solid fa-earth-americas"></i> Time Zone</span><span id="timezone-tomorrow">----</span></li>
-      </ul>
     </section>
   </main>
 
   <footer>
-    Powered by <a href="https://sunrisesunset.io" target="_blank" rel="noopener">SunriseSunset.io</a>
+    <p>Data provided by <a href="https://sunrisesunset.io" target="_blank" rel="noopener">sunrisesunset.io</a></p>
   </footer>
 
   <script src="app.js"></script>
