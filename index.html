@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise & Sunset Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><h1>Sunrise & Sunset Dashboard</h1></header>
+
+  <main>
+    <section class="controls">
+      <label for="city">Select a city:</label>
+      <select id="city"></select>
+      <button id="getData">Get Times</button>
+      <span id="error" class="error"></span>
+    </section>
+
+    <section id="results" class="results">
+      <div class="day-card">
+        <h2>Today</h2>
+        <ul>
+          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-today">--</span></li>
+          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-today">--</span></li>
+          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-today">--</span></li>
+          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-today">--</span></li>
+          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-today">--</span></li>
+          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-today">--</span></li>
+          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-today">--</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <h2>Tomorrow</h2>
+        <ul>
+          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-tomorrow">--</span></li>
+          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-tomorrow">--</span></li>
+          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-tomorrow">--</span></li>
+          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-tomorrow">--</span></li>
+          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-tomorrow">--</span></li>
+          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-tomorrow">--</span></li>
+          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-tomorrow">--</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data provided by <a href="https://sunrisesunset.io" target="_blank" rel="noopener">sunrisesunset.io</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
