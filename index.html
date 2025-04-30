@@ -7,50 +7,81 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header><h1>Sunrise & Sunset Dashboard</h1></header>
+  <header>
+    <h1><i class="fa-solid fa-sun"></i> Sunrise & Sunset Dashboard</h1>
+    <i class="fa-solid fa-star"></i>
+  </header>
 
   <main>
-    <section class="controls">
-      <label for="city">Select a city:</label>
+    <section class="card controls-card">
+      <label for="city">Select a city</label>
       <select id="city"></select>
       <button id="getData">Get Times</button>
       <span id="error" class="error"></span>
     </section>
 
-    <section id="results" class="results">
-      <div class="day-card">
-        <h2>Today</h2>
-        <ul>
-          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-today">--</span></li>
-          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-today">--</span></li>
-          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-today">--</span></li>
-          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-today">--</span></li>
-          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-today">--</span></li>
-          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-today">--</span></li>
-          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-today">--</span></li>
-        </ul>
+    <section id="daylightCard" class="card daylight-card">
+      <div class="daylight-header">
+        <h2><i class="fa-solid fa-sun"></i> Current Daylight</h2>
+        <span id="currentDate" class="date-tag"></span>
       </div>
 
-      <div class="day-card">
-        <h2>Tomorrow</h2>
-        <ul>
-          <li><span class="label">Sunrise:</span><span class="value" data-key="sunrise-tomorrow">--</span></li>
-          <li><span class="label">Sunset:</span><span class="value" data-key="sunset-tomorrow">--</span></li>
-          <li><span class="label">Dawn:</span><span class="value" data-key="dawn-tomorrow">--</span></li>
-          <li><span class="label">Dusk:</span><span class="value" data-key="dusk-tomorrow">--</span></li>
-          <li><span class="label">Solar Noon:</span><span class="value" data-key="solar-noon-tomorrow">--</span></li>
-          <li><span class="label">Day Length:</span><span class="value" data-key="day-length-tomorrow">--</span></li>
-          <li><span class="label">Time Zone:</span><span class="value" data-key="timezone-tomorrow">--</span></li>
-        </ul>
+      <div class="sun-times">
+        <span id="sunriseNow" class="sunrise-tag"></span>
+        <span id="sunsetNow" class="sunset-tag"></span>
       </div>
+
+      <div class="bar-wrapper">
+        <div id="daylightBar" class="daylight-bar"></div>
+        <span class="bar-label">Daylight</span>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><span class="metric-label"><i class="fa-regular fa-clock"></i> Day Length</span><span id="lenNow"></span></div>
+        <div class="metric"><span class="metric-label"><i class="fa-regular fa-sun"></i> Solar Noon</span><span id="noonNow"></span></div>
+        <div class="metric"><span class="metric-label"><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span id="dawnNow"></span></div>
+        <div class="metric"><span class="metric-label"><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span id="duskNow"></span></div>
+      </div>
+    </section>
+
+    <div class="tabs">
+      <button id="tabToday" class="tab active"><i class="fa-regular fa-calendar"></i> Today</button>
+      <button id="tabTomorrow" class="tab"><i class="fa-regular fa-calendar"></i> Tomorrow</button>
+    </div>
+
+    <section id="detailsToday" class="card details-card">
+      <h3><i class="fa-solid fa-sun"></i> Today's Details</h3>
+      <ul class="detail-list">
+        <li><span class="label"><i class="fa-solid fa-sun"></i> Sunrise</span><span class="value" data-key="sunrise-today">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-moon"></i> Sunset</span><span class="value" data-key="sunset-today">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-sun"></i> Solar Noon</span><span class="value" data-key="solar-noon-today">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span class="value" data-key="dawn-today">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span class="value" data-key="dusk-today">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-clock"></i> Day Length</span><span class="value" data-key="day-length-today">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-clock"></i> Time Zone</span><span class="value" data-key="timezone-today">--</span></li>
+      </ul>
+    </section>
+
+    <section id="detailsTomorrow" class="card details-card hidden">
+      <h3><i class="fa-regular fa-calendar"></i> Tomorrow's Details</h3>
+      <ul class="detail-list">
+        <li><span class="label"><i class="fa-solid fa-sun"></i> Sunrise</span><span class="value" data-key="sunrise-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-moon"></i> Sunset</span><span class="value" data-key="sunset-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-sun"></i> Solar Noon</span><span class="value" data-key="solar-noon-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-cloud-sun"></i> Dawn</span><span class="value" data-key="dawn-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-solid fa-cloud-moon"></i> Dusk</span><span class="value" data-key="dusk-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-clock"></i> Day Length</span><span class="value" data-key="day-length-tomorrow">--</span></li>
+        <li><span class="label"><i class="fa-regular fa-clock"></i> Time Zone</span><span class="value" data-key="timezone-tomorrow">--</span></li>
+      </ul>
     </section>
   </main>
 
   <footer>
-    <p>Data provided by <a href="https://sunrisesunset.io" target="_blank" rel="noopener">sunrisesunset.io</a></p>
+    Powered by <a href="https://sunrisesunset.io" target="_blank" rel="noopener">SunriseSunset.io</a>
   </footer>
 
   <script src="app.js"></script>
